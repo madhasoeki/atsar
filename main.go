@@ -5,6 +5,7 @@ import (
 	"net/http"
 
 	"atsar/config"
+	"atsar/routes"
 
 	"github.com/gin-gonic/gin"
 	"github.com/joho/godotenv"
@@ -19,6 +20,10 @@ func main() {
 	config.ConnectDatabase()
 
 	router := gin.Default()
+
+	// Initialize routes
+	routes.SetupUserRoutes(router)
+
 	router.GET("/ping", func(c *gin.Context) {
 		c.JSON(http.StatusOK, gin.H{
 			"message": "pong",
@@ -26,4 +31,5 @@ func main() {
 	})
 	router.Run()
 }
+
 
